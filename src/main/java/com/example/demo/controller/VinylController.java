@@ -38,4 +38,3 @@ public class VinylController {
        return ResponseEntity.ok(vinylService.deleteById(id));
     }
 }
-

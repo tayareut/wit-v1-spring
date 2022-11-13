@@ -41,5 +41,3 @@ public class Vinyl implements Serializable {
         this.album = album;
     }
 }
-
-
