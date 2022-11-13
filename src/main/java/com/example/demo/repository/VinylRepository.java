@@ -8,7 +8,7 @@ import java.util.List;
 
 @Component
 public class VinylRepository {
-    private final List<Vinyl> vinylList = new ArrayList<>();
+    private List<Vinyl> vinylList = new ArrayList<>();
 
     public List<Vinyl> getAll() {
         return vinylList;
@@ -50,3 +50,4 @@ public class VinylRepository {
         return newVinyl;
     }
 }
+

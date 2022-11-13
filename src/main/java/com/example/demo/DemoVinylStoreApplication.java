@@ -10,6 +10,7 @@ public class DemoVinylStoreApplication {
         SpringApplication.run(DemoVinylStoreApplication.class, args);
     }
 }
+
 /*For test:
 *   "id": 1,
     "artist": "Arctic Monkeys",
