@@ -8,7 +8,7 @@ import java.util.List;
 
 @Component
 public class VinylRepository {
-    private List<Vinyl> vinylList = new ArrayList<>();
+    private final List<Vinyl> vinylList = new ArrayList<>();
 
     public List<Vinyl> getAll() {
         return vinylList;
@@ -33,21 +33,25 @@ public class VinylRepository {
     }
 
     public Vinyl update(Vinyl vinyl) {
-        int idVinyl = 0;
-        int id = 0;
+        Vinyl newVinyl = new Vinyl(vinyl.getId(), vinyl.getArtist(), vinyl.getAlbum(), vinyl.getReleaseDate(), vinyl.getListPrice());
         for (int i = 0; i < vinylList.size(); i++) {
             if (vinylList.get(i).getId() == (vinyl.getId())) {
-                id = vinyl.getId();
-                idVinyl = i;
+                newVinyl.setId(vinyl.getId());
+                newVinyl.setArtist(vinyl.getArtist());
+                newVinyl.setAlbum(vinyl.getAlbum());
+                newVinyl.setListPrice(vinyl.getListPrice());
+                vinylList.set(i, vinyl);
                 break;
             }
         }
-        Vinyl newVinyl = new Vinyl();
-        newVinyl.setId(id);
-        newVinyl.setArtist(vinyl.getArtist());
-        newVinyl.setAlbum(vinyl.getAlbum());
-        vinylList.set(idVinyl, vinyl);
         return newVinyl;
+    }
+
+    @Override
+    public String toString() {
+        return "VinylRepository{" +
+                "vinylList=" + vinylList +
+                '}';
     }
 }
 

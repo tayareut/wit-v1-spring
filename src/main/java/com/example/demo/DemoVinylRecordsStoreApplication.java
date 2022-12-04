@@ -12,19 +12,27 @@ public class DemoVinylRecordsStoreApplication {
 }
 
 /*For test:
-*   "id": 1,
+    "id": 1,
     "artist": "Arctic Monkeys",
-    "album": "AM"
+    "album": "AM",
+    "releaseDate": 2013,
+    "listPrice": 17
 
     "id": 2,
     "artist": "Tame Impala",
-    "album": "Currents"
+    "album": "Currents",
+    "releaseDate": 2020,
+    "listPrice": 15
 
     "id": 3,
     "artist": "Amy Winehouse",
-    "album": "Back to Black"
+    "album": "Back to Black",
+    "releaseDate": 2010,
+    "listPrice": 23
 
     "id": 4,
     "artist": "Pink Floyd",
-    "album": "Dark Side of the Moon"
+    "album": "Dark Side of the Moon",
+    "releaseDate": 1990,
+    "listPrice": 30
 */
