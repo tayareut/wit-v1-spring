@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Vinyl implements Serializable {
 
     private  int id;
@@ -17,21 +19,6 @@ public class Vinyl implements Serializable {
     private String album;
     private int releaseDate;
     private int listPrice;
-
-    public Vinyl(int id, String artist, String album, int releaseDate, int listPrice) {
-        this.id = id;
-        this.artist = artist;
-        this.album = album;
-        this.releaseDate = releaseDate;
-        this.listPrice = listPrice;
-    }
-
-    public Vinyl(int id, String artist, String album, int releaseDate) {
-        this.id = id;
-        this.artist = artist;
-        this.album = album;
-        this.releaseDate = releaseDate;
-    }
 
     @Override
     public boolean equals(Object o) {
