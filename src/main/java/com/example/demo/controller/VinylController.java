@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.VinylDto;
-import com.example.demo.mapper.impl.VinylMapper;
+import com.example.demo.mapper.VinylMapper;
 import com.example.demo.model.Vinyl;
 import com.example.demo.service.VinylService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class VinylController {
     }
     @GetMapping("/vinylsdto/{id}")
     public ResponseEntity<VinylDto> getVinylDtoById(@PathVariable int id) {
-        VinylDto vinylDto = vinylMapper.entityToDto(vinylService.getById(id));
+        VinylDto vinylDto = vinylMapper.modelToDto(vinylService.getById(id));
 
         return ResponseEntity.ok(vinylDto);
     }
@@ -40,8 +40,8 @@ public class VinylController {
     }
 
     @PutMapping("/vinyls/{id}")
-    public void updateVinyl(@RequestBody Vinyl vinyl) {
-        vinylService.update(vinyl);
+    public Vinyl updateVinyl(@PathVariable int id, @RequestBody Vinyl vinyl) {
+        return vinylService.update(id, vinyl);
     }
 
     @DeleteMapping("/vinyls/{id}")

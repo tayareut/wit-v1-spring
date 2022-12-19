@@ -32,19 +32,10 @@ public class VinylRepository {
         vinylList.removeIf(vinyl -> vinyl.getId() == (id));
     }
 
-    public Vinyl update(Vinyl vinyl) {
-        Vinyl newVinyl = new Vinyl(vinyl.getId(), vinyl.getArtist(), vinyl.getAlbum(), vinyl.getReleaseDate(), vinyl.getListPrice());
-        for (int i = 0; i < vinylList.size(); i++) {
-            if (vinylList.get(i).getId() == (vinyl.getId())) {
-                newVinyl.setId(vinyl.getId());
-                newVinyl.setArtist(vinyl.getArtist());
-                newVinyl.setAlbum(vinyl.getAlbum());
-                newVinyl.setListPrice(vinyl.getListPrice());
-                vinylList.set(i, vinyl);
-                break;
-            }
-        }
-        return newVinyl;
+    public Vinyl update(int id, Vinyl vinyl) {
+        vinyl.setId(id);
+        vinylList.add(id, vinyl);
+        return vinyl;
     }
 
     @Override

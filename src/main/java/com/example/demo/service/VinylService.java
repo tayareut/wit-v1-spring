@@ -13,5 +13,5 @@ public interface VinylService {
 
     String deleteById(int id);
 
-    Vinyl update(Vinyl vinyl);
+    Vinyl update(int id, Vinyl vinyl);
 }

@@ -64,7 +64,7 @@ public class VinylServiceImpl implements VinylService {
     }
 
     @Override
-    public Vinyl update(Vinyl vinyl) {
+    public Vinyl update(int id, Vinyl vinyl) {
         logger.info("Update vinyl method for vinyl with id: {}", vinyl.getId());
 
         if (vinyl.getArtist() == null) {
@@ -87,6 +87,6 @@ public class VinylServiceImpl implements VinylService {
             throw new NonPositiveNumException("List Price must be more than 0");
         }
 
-        return vinylRepository.update(vinyl);
+        return vinylRepository.update(id, vinyl);
     }
 }
