@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.VinylDto;
+import com.example.demo.dto.VinylDtoArtistAlbumReleaseDate;
+import com.example.demo.mapper.VinylListMapperArtistAlbumReleaseDate;
 import com.example.demo.mapper.VinylMapper;
 import com.example.demo.model.Vinyl;
 import com.example.demo.service.VinylService;
@@ -23,10 +25,19 @@ public class VinylController {
         return ResponseEntity.ok(vinylService.getAll());
     }
 
+    @GetMapping("/vinyldtosfiltered")
+    public ResponseEntity<List<VinylDtoArtistAlbumReleaseDate>> getAllVinylsWithArtistAlbumReleaseDateFilteredSortedReversedByReleaseDate() {
+
+        List<VinylDtoArtistAlbumReleaseDate> vinylDtosArtistAlbumReleaseDate = VinylListMapperArtistAlbumReleaseDate.INSTANCE.convert(vinylService.getAllFilteredSortedVinyls(vinylService.getAll()));
+
+        return ResponseEntity.ok(vinylDtosArtistAlbumReleaseDate);
+    }
+
     @GetMapping("/vinyls/{id}")
     public Vinyl getVinylById(@PathVariable int id) {
         return ResponseEntity.ok(vinylService.getById(id)).getBody();
     }
+
     @GetMapping("/vinylsdto/{id}")
     public ResponseEntity<VinylDto> getVinylDtoById(@PathVariable int id) {
         VinylDto vinylDto = vinylMapper.modelToDto(vinylService.getById(id));

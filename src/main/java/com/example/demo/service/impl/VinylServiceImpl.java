@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VinylServiceImpl implements VinylService {
@@ -88,5 +90,15 @@ public class VinylServiceImpl implements VinylService {
         }
 
         return vinylRepository.update(id, vinyl);
+    }
+
+    @Override
+    public List<Vinyl> getAllFilteredSortedVinyls(List<Vinyl> vinyls) {
+        return vinyls.stream()
+                .filter(vinyl -> vinyl.getArtist().equals("Arctic Monkeys"))
+                .sorted(Comparator.comparingInt(Vinyl::getReleaseDate)
+                        .reversed())
+                .collect(Collectors.toList());
+
     }
 }

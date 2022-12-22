@@ -14,4 +14,6 @@ public interface VinylService {
     String deleteById(int id);
 
     Vinyl update(int id, Vinyl vinyl);
+
+    List<Vinyl> getAllFilteredSortedVinyls(List<Vinyl> vinyls);
 }
