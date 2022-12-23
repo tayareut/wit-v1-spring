@@ -25,10 +25,10 @@ public class VinylController {
         return ResponseEntity.ok(vinylService.getAll());
     }
 
-    @GetMapping("/vinyldtosfiltered")
-    public ResponseEntity<List<VinylDtoArtistAlbumReleaseDate>> getAllVinylsWithArtistAlbumReleaseDateFilteredSortedReversedByReleaseDate() {
+    @GetMapping("/vinyls/artist")
+    public ResponseEntity<List<VinylDtoArtistAlbumReleaseDate>> getAllVinylsWithArtistAlbumReleaseDateFilteredSortedReversedByReleaseDate(@RequestParam(name = "artist") String artist) {
 
-        List<VinylDtoArtistAlbumReleaseDate> vinylDtosArtistAlbumReleaseDate = VinylListMapperArtistAlbumReleaseDate.INSTANCE.convert(vinylService.getAllFilteredSortedVinyls(vinylService.getAll()));
+        List<VinylDtoArtistAlbumReleaseDate> vinylDtosArtistAlbumReleaseDate = VinylListMapperArtistAlbumReleaseDate.INSTANCE.convert(vinylService.getVinylsWithArtistFilteredSorted(vinylService.getAll(), artist));
 
         return ResponseEntity.ok(vinylDtosArtistAlbumReleaseDate);
     }

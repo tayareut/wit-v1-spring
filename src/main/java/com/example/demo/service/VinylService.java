@@ -15,5 +15,5 @@ public interface VinylService {
 
     Vinyl update(int id, Vinyl vinyl);
 
-    List<Vinyl> getAllFilteredSortedVinyls(List<Vinyl> vinyls);
+    List<Vinyl> getVinylsWithArtistFilteredSorted(List<Vinyl> vinyls, String artist);
 }

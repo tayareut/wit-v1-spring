@@ -93,9 +93,9 @@ public class VinylServiceImpl implements VinylService {
     }
 
     @Override
-    public List<Vinyl> getAllFilteredSortedVinyls(List<Vinyl> vinyls) {
+    public List<Vinyl> getVinylsWithArtistFilteredSorted(List<Vinyl> vinyls, String artist) {
         return vinyls.stream()
-                .filter(vinyl -> vinyl.getArtist().equals("Arctic Monkeys"))
+                .filter(vinyl -> vinyl.getArtist().equals(artist))
                 .sorted(Comparator.comparingInt(Vinyl::getReleaseDate)
                         .reversed())
                 .collect(Collectors.toList());
