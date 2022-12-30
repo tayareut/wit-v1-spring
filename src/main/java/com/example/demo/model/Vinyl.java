@@ -14,7 +14,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class Vinyl implements Serializable {
 
-    private  int id;
+    private int id;
     private String artist;
     private String album;
     private int releaseDate;

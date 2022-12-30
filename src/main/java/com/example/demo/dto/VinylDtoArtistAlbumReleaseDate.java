@@ -12,7 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VinylDtoArtistAlbumReleaseDate implements Serializable {
-
     private String artist;
     private String album;
     private int releaseDate;

@@ -1,33 +1,32 @@
-package com.example.demo.hendler;
+package com.example.demo.handler;
 
 import com.example.demo.dto.ErrorDto;
 import com.example.demo.exception.NonPositiveNumException;
 import com.example.demo.exception.NotNullValueException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Arrays;
 
+@Slf4j
 @ControllerAdvice
 public class ValidValueExceptionHandler {
-    Logger logger = LoggerFactory.getLogger(ValidValueExceptionHandler.class);
 
     @ExceptionHandler(NotNullValueException.class)
     public ResponseEntity<ErrorDto> handleException(NotNullValueException exception) {
-        logger.warn("There is empty field: {}", exception.getMessage());
+        log.warn("There is empty field: {}", exception.getMessage());
 
-        logger.warn(Arrays.toString(exception.getStackTrace()));
+        log.warn(Arrays.toString(exception.getStackTrace()));
         return ResponseEntity.badRequest().body(new ErrorDto(400, exception.getMessage()));
     }
 
     @ExceptionHandler(NonPositiveNumException.class)
     public ResponseEntity<ErrorDto> handleException(NonPositiveNumException exception) {
-        logger.warn("There is not positive number: {}", exception.getMessage());
+        log.warn("There is not positive number: {}", exception.getMessage());
 
-        logger.warn(Arrays.toString(exception.getStackTrace()));
+        log.warn(Arrays.toString(exception.getStackTrace()));
         return ResponseEntity.badRequest().body(new ErrorDto(400, exception.getMessage()));
     }
 }

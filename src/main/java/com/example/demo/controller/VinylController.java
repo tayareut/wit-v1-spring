@@ -5,6 +5,7 @@ import com.example.demo.dto.VinylDtoArtistAlbumReleaseDate;
 import com.example.demo.mapper.VinylListMapperArtistAlbumReleaseDate;
 import com.example.demo.mapper.VinylMapper;
 import com.example.demo.model.Vinyl;
+import com.example.demo.repository.SearchVinylsResponse;
 import com.example.demo.service.VinylService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,16 @@ public class VinylController {
         return ResponseEntity.ok(vinylDtosArtistAlbumReleaseDate);
     }
 
+    @GetMapping("/vinyls/search")
+    public ResponseEntity<SearchVinylsResponse> getAllVinylsByAlbum(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "searchLine") String searchLine) {
+
+        SearchVinylsResponse searchVinylsByAlbumResponse = vinylService.searchVinylsByAlbum(page, size, searchLine);
+        return ResponseEntity.ok(searchVinylsByAlbumResponse);
+    }
+
     @GetMapping("/vinyls/{id}")
     public Vinyl getVinylById(@PathVariable int id) {
         return ResponseEntity.ok(vinylService.getById(id)).getBody();
@@ -45,7 +56,7 @@ public class VinylController {
         return ResponseEntity.ok(vinylDto);
     }
 
-    @PostMapping("/vinyl")
+    @PostMapping("/vinyls")
     public ResponseEntity<Vinyl> createVinyl(@RequestBody Vinyl vinyl) {
         return ResponseEntity.ok(vinylService.save(vinyl));
     }
