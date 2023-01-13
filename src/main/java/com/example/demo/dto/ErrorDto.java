@@ -1,30 +1,24 @@
 package com.example.demo.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.http.HttpStatus;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ErrorDto {
     private int status;
+    private HttpStatus httpStatus;
     private String message;
+    private Object errors;
 
-    public ErrorDto() {
-    }
-
-    public ErrorDto(int status, String message) {
+    public ErrorDto(final int status, final HttpStatus httpStatus, final String errors) {
         this.status = status;
-        this.message = message;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+        this.httpStatus = httpStatus;
+        this.errors = errors;
     }
 }

@@ -1,9 +1,8 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.NonPositiveNumException;
-import com.example.demo.exception.NotNullValueException;
+import com.example.demo.dto.VinylRequest;
 import com.example.demo.model.Vinyl;
-import com.example.demo.repository.SearchVinylsResponse;
+import com.example.demo.dto.SearchVinylsResponse;
 import com.example.demo.repository.VinylRepository;
 import com.example.demo.service.VinylService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,29 +24,9 @@ public class VinylServiceImpl implements VinylService {
     }
 
     @Override
-    public Vinyl save(Vinyl vinyl) {
-        log.info("Save vinyl method for vinyl with album name: {}", vinyl.getAlbum());
-        if (vinyl.getArtist() == null) {
-            throw new NotNullValueException("Artist name must be not null");
-        }
-
-        if (vinyl.getAlbum() == null) {
-            throw new NotNullValueException("Album name must be not null");
-        }
-
-        if (vinyl.getId() <= 0) {
-            throw new NonPositiveNumException("Id must be more than 0");
-        }
-
-        if (vinyl.getReleaseDate() <= 0) {
-            throw new NonPositiveNumException("Release Date must be more than 0");
-        }
-
-        if (vinyl.getListPrice() <= 0) {
-            throw new NonPositiveNumException("List Price must be more than 0");
-        }
-
-        return vinylRepository.save(vinyl);
+    public Vinyl save(VinylRequest vinylRequest) {
+        log.info("Save vinyl method for vinyl with album name: {}", vinylRequest.getAlbum());
+        return vinylRepository.save(new Vinyl(vinylRequest.getId(),vinylRequest.getArtist(),vinylRequest.getAlbum(),vinylRequest.getReleaseDate(),vinylRequest.getListPrice()));
     }
 
     @Override
@@ -66,27 +45,6 @@ public class VinylServiceImpl implements VinylService {
     @Override
     public Vinyl update(int id, Vinyl vinyl) {
         log.info("Update vinyl method for vinyl with id: {}", vinyl.getId());
-
-        if (vinyl.getArtist() == null) {
-            throw new NotNullValueException("Artist name must be not null");
-        }
-
-        if (vinyl.getAlbum() == null) {
-            throw new NotNullValueException("Album name must be not null");
-        }
-
-        if (vinyl.getId() < 1) {
-            throw new NonPositiveNumException("Id must be more than 0");
-        }
-
-        if (vinyl.getReleaseDate() < 1) {
-            throw new NonPositiveNumException("Release Date must be more than 0");
-        }
-
-        if (vinyl.getListPrice() < 1) {
-            throw new NonPositiveNumException("List Price must be more than 0");
-        }
-
         return vinylRepository.update(id, vinyl);
     }
 
@@ -97,24 +55,8 @@ public class VinylServiceImpl implements VinylService {
     }
 
     @Override
-    public SearchVinylsResponse searchVinylsByAlbum(int page, int elementsPerPage, String searchLine) {
+    public SearchVinylsResponse searchVinylsByAlbum(int page, int elementsPerPage, String searchLine, String sortField, String sortDirection) {
         log.info("Search vinyl records method by album name:" + searchLine + ". Page number of search results:" + page + ", elements per page:" + elementsPerPage);
-
-        if (page < 1) {
-            log.error(page + "is not a valid page number");
-            throw new NonPositiveNumException("Page number is less than 1");
-        }
-
-        if (elementsPerPage < 1) {
-            log.error(elementsPerPage + "is not a valid elementsPerPage");
-            throw new NonPositiveNumException("Number of elements per page is less than 1");
-        }
-
-        if (searchLine == null || searchLine.trim().isEmpty()) {
-            log.error(searchLine + "is not a valid searchLine");
-            throw new NotNullValueException("Search line is empty");
-        }
-
-        return vinylRepository.searchVinylsByAlbum(page, elementsPerPage, searchLine);
+        return vinylRepository.searchVinylsByAlbum(page, elementsPerPage, searchLine, sortField, sortDirection);
     }
 }
